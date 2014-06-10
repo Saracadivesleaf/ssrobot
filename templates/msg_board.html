@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+	<ul>
+	<li>Here comes a message board for WeChat.</li>
+	{% if msg_to_show %}
+		{% for each_msg in msg_to_show %}
+		<li>{{ each_msg.msg }}&nbsp&nbsp--{{ each_msg.receive_time }}</li>
+		{% endfor %}
+	{% endif %}
+	</ul>
+</body>
+</html>
