@@ -3,8 +3,8 @@ from msg_board.models import board_content
 
 
 # Create your views here.
-def add_to_board(msg_get):
-	msg_to_save = board_content(msg = msg_get.Content.text)
+def add_to_board(msg_text):
+	msg_to_save = board_content(msg = msg_text)
 	msg_to_save.save()
 	print 'Save'
 	return True

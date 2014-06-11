@@ -8,6 +8,5 @@ class board_content(models.Model):
 #    from_user = models.CharField(max_length=100, null=true)
     receive_time = models.DateTimeField(auto_now_add=True)
 
-#    def __unicode__(self):
-#    	pass
-#        return self.receive_time
+    def __unicode__(self):
+        return self.msg

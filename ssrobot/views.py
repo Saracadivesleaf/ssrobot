@@ -37,19 +37,19 @@ def post(request):
         return ''
 
     msg_reply = context_processers.midware(msg_get)
-    print msg_reply
+#    print msg_reply
 
-    if msg_get.MsgType:
-        context = {
-                'to_user': msg_get.FromUserName.text,
-                'from_user': msg_get.ToUserName.text,
-                'create_time': int(time.time()),
-                'msg_type': 'text',
-                'content': msg_reply,
-            }
-        print context
-        render = render_to_string('text.xml', context)
-        print render
-        return HttpResponse(render)
+#    if msg_get.MsgType:
+#        context = {
+#                'to_user': msg_get.FromUserName.text,
+#                'from_user': msg_get.ToUserName.text,
+#                'create_time': int(time.time()),
+#                'msg_type': 'text',
+#                'content': msg_reply,
+#            }
+#        print context
+    render = render_to_string('text.xml', msg_reply)
+    print render
+    return HttpResponse(render)
 
     return ''
