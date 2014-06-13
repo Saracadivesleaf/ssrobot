@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 
 from msg_board.views import add_to_board
+from weather.views import weather_query
 import time
 
 
@@ -13,9 +14,9 @@ def midware(msg_get):
 def msg_filter(msg_get):
 	msg_text = msg_get.Content.text
 	msg_splited = msg_text.split(' ', 1)
-	print msg_splited
+#	print msg_splited
 	msg_key = msg_splited[0]
-	print msg_key
+#	print msg_key
 	try:
 		msg_body = msg_splited[1]
 	except IndexError:
@@ -35,11 +36,8 @@ def msg_filter(msg_get):
 				'msg_type': 'text',
 				'content': 'Error!',
 			}
-	elif msg_key == u'查询':
-		msg_content = {
-		'msg_type': 'text',
-		'content': 'Query',
-		}
+	elif msg_key == u'天气':
+		msg_content = weather_query(msg_body)
 	
 	return msg_response(msg_get, msg_content)
 
