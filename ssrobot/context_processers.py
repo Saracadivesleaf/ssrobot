@@ -15,17 +15,16 @@ def midware(msg_get):
 def msg_filter(msg_get):
 	msg_text = msg_get.Content.text
 	msg_splited = msg_text.split(' ', 1)
-#	print msg_splited
 	msg_key = msg_splited[0]
-#	print msg_key
 	try:
 		msg_body = msg_splited[1]
 	except IndexError:
-		pass
+		msg_body = ''
 
 	
 	if msg_key == u'留言':
-		is_write = add_to_board(msg_body)
+		from_user = msg_get.FromUserName.text
+		is_write = add_to_board(from_user, msg_body)
 		
 		if is_write == True:
 			msg_content = {
@@ -39,6 +38,10 @@ def msg_filter(msg_get):
 			}
 
 	elif msg_key == u'天气':
+		if msg_body:
+			pass
+		else:
+			msg_body = u'保定'
 		msg_content = weather_query(msg_body)
 
 	elif msg_key == u'签到':
