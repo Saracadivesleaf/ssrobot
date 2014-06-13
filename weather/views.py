@@ -21,8 +21,7 @@ def weather_query(location):
 
 	json_get = res.read()
 	result = json.loads(json_get)
-	msg_str = decode_weather(result)
-	print msg_str
+	msg_str = 'Location: ' + location + '\n' +decode_weather(result)
 
 	msg_content = {
 		'msg_type': 'text',
@@ -35,7 +34,6 @@ def weather_query(location):
 
 def decode_weather(result):
 	weather_today = result['results'][0]['weather_data'][0]
-	print weather_today
 	msg_str = 'Weather: ' + weather_today['weather'] + '\n' + 'Temperature: ' + weather_today['temperature'] + '\n' + 'Wind: ' + weather_today['wind']
 
 	return msg_str
