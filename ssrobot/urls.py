@@ -4,6 +4,7 @@ from django.contrib import admin
 
 from ssrobot.views import post
 from msg_board.views import show_msg_board
+from checkin.views import show_checkin
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,5 +14,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', post),
-    url(r'^board/', show_msg_board)
+    url(r'^board/', show_msg_board),
+    url(r'^checkin', show_checkin),
 )

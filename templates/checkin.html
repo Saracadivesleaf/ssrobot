@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+	<ul>
+	<li>Check-ins.</li>
+	{% if checkin_to_show %}
+		{% for each_checkin in checkin_to_show %}
+		<li>{{ each_checkin.openId }}&nbsp&nbsp--{{ each_checkin.checkin_date }}&nbsp&nbsp{{ each_checkin.checkin_time }}</li>
+		{% endfor %}
+	{% endif %}
+	</ul>
+</body>
+</html>

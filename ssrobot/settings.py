@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'msg_board',
     'weather',
+    'checkin',
 )
 
 MIDDLEWARE_CLASSES = (

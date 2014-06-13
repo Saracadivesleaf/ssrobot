@@ -2,6 +2,7 @@
 
 from msg_board.views import add_to_board
 from weather.views import weather_query
+from checkin.views import checkin_write
 import time
 
 
@@ -36,8 +37,12 @@ def msg_filter(msg_get):
 				'msg_type': 'text',
 				'content': 'Error!',
 			}
+
 	elif msg_key == u'天气':
 		msg_content = weather_query(msg_body)
+
+	elif msg_key == u'签到':
+		msg_content = checkin_write(msg_get)
 	
 	return msg_response(msg_get, msg_content)
 
