@@ -15,8 +15,13 @@ def msg_filter(msg_get):
 	msg_splited = msg_text.split(' ', 1)
 	print msg_splited
 	msg_key = msg_splited[0]
-	msg_body = msg_splited[1]
+	print msg_key
+	try:
+		msg_body = msg_splited[1]
+	except IndexError:
+		pass
 
+	
 	if msg_key == u'留言':
 		is_write = add_to_board(msg_body)
 		
@@ -30,6 +35,11 @@ def msg_filter(msg_get):
 				'msg_type': 'text',
 				'content': 'Error!',
 			}
+	elif msg_key == u'查询':
+		msg_content = {
+		'msg_type': 'text',
+		'content': 'Query',
+		}
 	
 	return msg_response(msg_get, msg_content)
 
