@@ -17,6 +17,7 @@ def weather_query(location):
 	url = 'http://api.map.baidu.com/telematics/v3/weather'
 	post_str = urllib.urlencode(data)
 	full_url = url + '?' + post_str
+
 	res = urllib2.urlopen(full_url)
 
 	json_get = res.read()
@@ -37,8 +38,3 @@ def decode_weather(result):
 	msg_str = 'Weather: ' + weather_today['weather'] + '\n' + 'Temperature: ' + weather_today['temperature'] + '\n' + 'Wind: ' + weather_today['wind']
 
 	return msg_str
-
-
-def show_weather(request):
-	location = u'北京'
-	msg_content = weather_query(location)
