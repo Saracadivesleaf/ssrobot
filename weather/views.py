@@ -1,13 +1,23 @@
 #-*- coding:utf-8 -*-
-
 from django.shortcuts import render
+from utils.msg_tools import get_msg_body
+
 import urllib2
 import urllib
 import json
 
-
-
 # Create your views here.
+def run(msg_get):
+	msg_body = get_msg_body(msg_get)
+
+	if msg_body:
+		pass
+	else:
+		msg_body = u'保定'
+	msg_content = weather_query(msg_body)
+
+	return msg_content
+
 def weather_query(location):
 	data = {
 		'location': location.encode('utf-8'),
