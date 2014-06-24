@@ -2,8 +2,6 @@
 import time
 
 from pkg.views import get_pkg
-#import weather
-from weather.views import run
 
 
 def midware(msg_get):
