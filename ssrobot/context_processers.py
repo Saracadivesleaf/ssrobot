@@ -19,17 +19,14 @@ def msg_filter(msg_get):
 
 	pkg_name = get_pkg(msg_key)
 
-	if pkg_name == 'weather':
-#		msg_content = weather.views.run(msg_get)
-		msg_content = run(msg_get)
-	elif pkg_name:
+	if pkg_name:
 		try:
 			pkg_object = __import__(pkg_name)
 			msg_content = pkg_object.views.run(msg_get)
 		except AttributeError:
 			msg_content = {
 				'msg_type': 'text',
-				'content': 'No Module!',
+				'content': 'AttributeError',
 			}
 	else:
 		msg_content = {
