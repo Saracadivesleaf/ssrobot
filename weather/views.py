@@ -8,8 +8,8 @@ import json
 
 # Create your views here.
 def run(msg_get):
+	print 'weather_run'
 	msg_body = get_msg_body(msg_get)
-
 	if msg_body:
 		pass
 	else:
