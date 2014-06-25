@@ -7,5 +7,6 @@ from pkg.models import Package
 def get_pkg(key_word):
 	try:
 		pkg_get = Package.objects.get(key_word = key_word, status = True)
+		return pkg_get.name
 	except ObjectDoesNotExist:
 		return ''
