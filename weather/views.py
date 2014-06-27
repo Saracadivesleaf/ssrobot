@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 from django.shortcuts import render
 from utils.msg_tools import get_msg_body
+from utils.msg_tools import render_msg_content
 
 import urllib2
 import urllib
@@ -9,7 +10,6 @@ import json
 # Create your views here.
 def run(msg_get):
 	msg_body = get_msg_body(msg_get)
-
 	if msg_body:
 		pass
 	else:
@@ -34,10 +34,7 @@ def weather_query(location):
 	result = json.loads(json_get)
 	msg_str = 'Location: ' + location + '\n' +decode_weather(result)
 
-	msg_content = {
-		'msg_type': 'text',
-		'content': msg_str
-	}
+	msg_content = render_msg_content('text', msg_str)
 
 	return msg_content
 

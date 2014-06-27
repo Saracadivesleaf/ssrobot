@@ -18,8 +18,16 @@ def msg_filter(msg_get):
 	pkg_name = get_pkg(msg_key)
 
 	if pkg_name:
-		pkg = __import__(pkg_name)
-		msg_content = pkg.views.run(msg_get)
+		pkg_name += '.views'
+		print pkg_name
+		try:
+			pkg_object = __import__(pkg_name, fromlist=['run'])
+			msg_content = pkg_object.run(msg_get)
+		except AttributeError:
+			msg_content = {
+				'msg_type': 'text',
+				'content': 'AttributeError',
+			}
 	else:
 		msg_content = {
 			'msg_type': 'text',
