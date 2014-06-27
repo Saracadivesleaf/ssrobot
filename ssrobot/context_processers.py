@@ -1,9 +1,7 @@
 #-*- coding:utf-8 -*-
-
-from msg_board.views import add_to_board
-from weather.views import weather_query
-from checkin.views import checkin_write
 import time
+
+from pkg.views import get_pkg
 
 
 def midware(msg_get):
@@ -16,39 +14,27 @@ def msg_filter(msg_get):
 	msg_text = msg_get.Content.text
 	msg_splited = msg_text.split(' ', 1)
 	msg_key = msg_splited[0]
-	try:
-		msg_body = msg_splited[1]
-	except IndexError:
-		msg_body = ''
 
-	
-	if msg_key == u'留言':
-		from_user = msg_get.FromUserName.text
-		is_write = add_to_board(from_user, msg_body)
-		
-		if is_write == True:
+	pkg_name = get_pkg(msg_key)
+
+	if pkg_name:
+		pkg_name += '.views'
+		print pkg_name
+		try:
+			pkg_object = __import__(pkg_name, fromlist=['run'])
+			msg_content = pkg_object.run(msg_get)
+		except AttributeError:
 			msg_content = {
 				'msg_type': 'text',
-				'content': 'OK',
+				'content': 'AttributeError',
 			}
-		else:
-			msg_content = {
-				'msg_type': 'text',
-				'content': 'Error!',
-			}
+	else:
+		msg_content = {
+			'msg_type': 'text',
+			'content': 'No Module!',
+		}
 
-	elif msg_key == u'天气':
-		if msg_body:
-			pass
-		else:
-			msg_body = u'保定'
-		msg_content = weather_query(msg_body)
-
-	elif msg_key == u'签到':
-		msg_content = checkin_write(msg_get)
-	
 	return msg_response(msg_get, msg_content)
-
 
 def msg_response(msg_get, msg_content):
 	to_user = msg_get.FromUserName.text

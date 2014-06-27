@@ -37,6 +37,6 @@ def post(request):
 
     msg_reply = context_processers.midware(msg_get)
 
-    render = render_to_string('text.xml', msg_reply)
+    render = render_to_string('xml/text.xml', msg_reply)
     print render
     return HttpResponse(render)
